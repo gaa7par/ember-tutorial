@@ -3,14 +3,14 @@ import hbs from 'htmlbars-inline-precompile';
 import wait from 'ember-test-helpers/wait';
 import RSVP from 'rsvp';
 
-moduleForComponent('list-filter', 'Integration | Component | list filter', {
+moduleForComponent('list-filter', 'Integration | Component | filter listing', {
   integration: true
 });
 
 const ITEMS = [{city: 'San Francisco'}, {city: 'Portland'}, {city: 'Seattle'}];
 const FILTERED_ITEMS = [{city: 'San Francisco'}];
 
-test('should initially load all listings', function(assert) {
+test('should initially load all listings', function (assert) {
   this.on('filterByCity', (val) => {
     if (val === '') {
       return RSVP.resolve(ITEMS);
@@ -27,6 +27,7 @@ test('should initially load all listings', function(assert) {
           {{item.city}}
         </li>
       {{/each}}
+      </ul>
     {{/list-filter}}
   `);
 
@@ -36,7 +37,7 @@ test('should initially load all listings', function(assert) {
   });
 });
 
-test('should update with matching listing', function(assert) {
+test('should update with matching listings', function (assert) {
   this.on('filterByCity', (val) => {
     if (val === '') {
       return RSVP.resolve(ITEMS);
@@ -53,6 +54,7 @@ test('should update with matching listing', function(assert) {
           {{item.city}}
         </li>
       {{/each}}
+      </ul>
     {{/list-filter}}
   `);
 
@@ -63,3 +65,4 @@ test('should update with matching listing', function(assert) {
     assert.equal(this.$('.city').text().trim(), 'San Francisco');
   });
 });
+
